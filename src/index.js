@@ -1,6 +1,9 @@
 // Require external modules
 const mongoose = require("mongoose");
 
+// require out routes
+const routes = require("./routes/index");
+
 // Require the framework and instantiate it
 const fastify = require("fastify")({
   logger: true,
@@ -15,6 +18,10 @@ mongoose
 // Declare a route
 fastify.get("/", async (request, reply) => {
   return { hello: "world" };
+});
+
+routes.forEach((route) => {
+  fastify.route(route);
 });
 
 // Run the server!
